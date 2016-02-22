@@ -1,8 +1,10 @@
-{% extends "admin/base.html" %}
+{% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
 {{ form.media }}
+<img src="https://www.djangoproject.com/s/img/logos/django-logo-positive.png" alt="" width="100px">
+
 {% endblock %}
 
 {% block bodyclass %}{{ block.super }} login{% endblock %}
@@ -13,7 +15,7 @@
 
 {% block content_title %}{% endblock %}
 
-{% block breadcrumbs %}teste{% endblock %}
+{% block breadcrumbs %}{% endblock %}
 
 {% block content %}
 {% if form.errors and not form.non_field_errors %}
@@ -41,8 +43,6 @@
 {% endblocktrans %}
 </p>
 {% endif %}
-
-<p>Teste</p>
 
 <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
   <div class="form-row">
