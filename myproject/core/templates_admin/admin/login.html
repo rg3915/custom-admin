@@ -1,0 +1,69 @@
+{% extends "admin/base.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "css/signin.css" %}" />
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block title %}
+    <title>Login</title>
+{% endblock title %}
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="static/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="static/css/signin.css" rel="stylesheet"> -->
+
+{% block content %}
+
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+  <div class="container">
+
+  <form class="form-signin" action="{{ app_path }}" method="POST" role="form" id="login-form">
+    {% csrf_token %}
+    <h2 class="form-signin-heading">Login</h2>
+
+    <div>
+      <!-- Os campos originais são: -->
+      <!-- {{ form.username }} -->
+      <!-- {{ form.password }} -->
+      <input type="text" id="username" name="username" class="form-control" placeholder="Usuário" required autofocus>
+      <input type="password" name="password" class="form-control" placeholder="Senha" required>
+      <label class="checkbox">
+      <!-- <input type="checkbox" value="remember-me"> Lembrar-me -->
+      </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans 'Log in' %}</button>
+    </div>
+
+    {% url 'admin_password_reset' as password_reset_url %}
+    {% if password_reset_url %}
+    <div class="password-reset-link">
+      <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+    </div>
+    {% endif %}
+
+  </form>
+
+    <script type="text/javascript">
+    document.getElementById('username').focus()
+    </script>
+  </div>
+
+{% endblock %}
