@@ -32,4 +32,25 @@ python manage.py createsuperuser --username='admin' --email=''
 
 ## Features
 
-* Alterando a tela de login
+### Alterando a tela de login
+
+Em `settings.py` defina sua APP como primeiro em INSTALLED_APPS.
+
+```python
+INSTALLED_APPS = [
+    'myproject.core',
+    'django.contrib.admin',
+    ...
+```
+
+Na pasta myproject/core/ crie a pasta templates/admin/.
+
+Dentro do seu ambiente virtual procure por django/contrib/admin/templates/admin/login.html
+
+Ou acesse https://github.com/django/django/tree/master/django/contrib/admin/templates/admin/ .
+
+E coloque dentro da sua pasta, ficando assim:
+
+`myproject/core/templates/admin/login.html`
+
+A partir dai você pode alterar sua tela de login como desejar.
