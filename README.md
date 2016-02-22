@@ -29,3 +29,7 @@ cp contrib/env-sample .env
 python manage.py migrate
 python manage.py createsuperuser --username='admin' --email=''
 ```
+
+## Features
+
+* Alterando a tela de login
