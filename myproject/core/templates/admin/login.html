@@ -1,24 +1,13 @@
 {% extends "admin/base_site.html" %}
 {% load i18n admin_static %}
+{% load static %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}" />
 {{ form.media }}
-<img src="https://www.djangoproject.com/s/img/logos/django-logo-positive.png" alt="" width="100px">
 
-<style>
-footer {
-  position:fixed;
-  bottom: 0;
-  width: 100%;
-  min-height: 30px;
-  max-height: 60px;
-  color: #FFC;
-  background-color: #417690; 
-}
-footer p {
-  margin: 20px 10px;
-}
-</style>
+<img src="https://www.djangoproject.com/s/img/logos/django-logo-positive.png" alt="" width="100px">
 
 <footer>
   <p>Copyright &copy; 2016. All rights reserved</p>
