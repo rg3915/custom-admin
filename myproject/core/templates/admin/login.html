@@ -5,6 +5,25 @@
 {{ form.media }}
 <img src="https://www.djangoproject.com/s/img/logos/django-logo-positive.png" alt="" width="100px">
 
+<style>
+footer {
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  min-height: 30px;
+  max-height: 60px;
+  color: #FFC;
+  background-color: #417690; 
+}
+footer p {
+  margin: 20px 10px;
+}
+</style>
+
+<footer>
+  <p>Copyright &copy; 2016. All rights reserved</p>
+</footer>
+
 {% endblock %}
 
 {% block bodyclass %}{{ block.super }} login{% endblock %}
@@ -69,4 +88,5 @@
 document.getElementById('id_username').focus()
 </script>
 </div>
+
 {% endblock %}
