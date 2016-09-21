@@ -89,9 +89,9 @@ mkdir myauth/tests
 touch myauth/tests/{__init__.py,test_backends.py,test_custom_user.py}
 ```
 
-[test_backends.py]()
+[test_backends.py](myproject/myauth/tests/test_backends.py)
 
-[test_custom_user.py]()
+[test_custom_user.py](myproject/myauth/tests/test_custom_user.py)
 
 
 #### Modelo
@@ -141,21 +141,21 @@ class User(AbstractUser):
 
 Seguindo a [documentação](https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#a-full-example) vamos criar um `UserManager`, mas eu preferi fazer isso num arquivo separado:
 
-[managers.py]()
+[managers.py](myproject/myauth/managers.py)
 
 
 #### backends
 
-[backends.py]() é o arquivo que faz a autenticação.
+[backends.py](myproject/myauth/backends.py) é o arquivo que faz a autenticação.
 
 #### Formulários
 
-Em [forms.py]() criamos `UserCreationForm` e `UserChangeForm`.
+Em [forms.py](myproject/myauth/forms.py) criamos `UserCreationForm` e `UserChangeForm`.
 
 
 #### Admin
 
-Em [admins.py]() definimos `UserAdmin` herdando de `BaseUserAdmin`.
+Em [admins.py](myproject/myauth/admins.py) definimos `UserAdmin` herdando de `BaseUserAdmin`.
 
 
 #### Migração
