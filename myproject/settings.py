@@ -16,6 +16,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
+AUTH_USER_MODEL = 'myauth.User'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -27,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # my apps
+    'myproject.myauth.apps.MyauthConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
