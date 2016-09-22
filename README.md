@@ -274,3 +274,39 @@ Veja o `templates/core/director.html`
 {% endblock content %}
 ```
 
+## [django-registration-redux](https://github.com/macropin/django-registration) para gerenciamento de login e troca de senha
+
+```bash
+pip install django-registration-redux
+pip freeze > requirements.txt
+```
+
+Em `settings.py`, em `INSTALLED_APPS` insira 'registration'.
+
+```python
+INSTALLED_APPS = [
+    ...
+    'myproject.core',
+    'registration',
+]
+```
+
+E insira também
+
+```python
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+REGISTRATION_OPEN = True
+
+LOGIN_URL = '/admin/login/'
+LOGIN_REDIRECT_URL = '/'
+```
+
+Em `urls.py` insira
+
+```python
+url(r'^accounts/', include('registration.backends.simple.urls')),
+```
+
+Na pasta `templates` crie uma pasta chamada `registration` e copie todos esses [templates](https://github.com/macropin/django-registration/tree/master/registration/templates/registration) para dentro dele.
+

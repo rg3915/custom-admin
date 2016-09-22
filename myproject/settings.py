@@ -31,7 +31,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'myproject.myauth.apps.MyauthConfig',
+    'registration',
 ]
+
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+REGISTRATION_OPEN = True
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -117,3 +123,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 LOGIN_URL = '/admin/login/'
+LOGIN_REDIRECT_URL = '/'
