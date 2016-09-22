@@ -225,7 +225,7 @@ class LoggedView(LoginRequiredMixin, TemplateView):
     template_name = 'core/logged.html'
 ```
 
-Defina uma [url](). E em templates, crie `logged.html`.
+Defina uma [url](myproject/core/urls.py). E em templates, crie `logged.html`.
 
 ```html
 {% extends "base.html" %}
