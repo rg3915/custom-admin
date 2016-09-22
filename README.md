@@ -30,9 +30,9 @@ python manage.py migrate
 python manage.py createsuperuser --email='nome@email.com'
 ```
 
-## Features
+# Features
 
-### Alterando a tela de login
+## Alterando a tela de login
 
 Em `settings.py` defina sua APP como primeiro em INSTALLED_APPS.
 
@@ -56,7 +56,7 @@ E coloque dentro da sua pasta, ficando assim:
 A partir dai você pode alterar sua tela de login como desejar.
 
 
-### Login personalizado com email e senha
+## Login personalizado com email e senha
 
 A partir da documentação [Customizing authentication in Django](https://docs.djangoproject.com/en/1.10/topics/auth/customizing/) vamos fazer login com `email` e `senha`, ao invés de username.
 
@@ -80,7 +80,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-#### Testes
+### Testes
 
 Vamos criar os testes:
 
@@ -94,7 +94,7 @@ touch myauth/tests/{__init__.py,test_backends.py,test_custom_user.py}
 [test_custom_user.py](myproject/myauth/tests/test_custom_user.py)
 
 
-#### Modelo
+### Modelo
 
 A maioria dos tutoriais, inclusive a documentação cria a nova classe herdando de [AbstractBaseUser](https://github.com/django/django/blob/master/django/contrib/auth/base_user.py#L52) mas ele só contém os campos de autenticação, `password` e `last_login`. O modelo [AbstractUser](https://github.com/django/django/blob/master/django/contrib/auth/models.py#L297) é mais completo, ele contém todos os campos conhecidos de `User`, que são: `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active` e `date_joined`.
 
@@ -144,21 +144,21 @@ Seguindo a [documentação](https://docs.djangoproject.com/en/1.10/topics/auth/c
 [managers.py](myproject/myauth/managers.py)
 
 
-#### backends
+### backends
 
 [backends.py](myproject/myauth/backends.py) é o arquivo que faz a autenticação.
 
-#### Formulários
+### Formulários
 
 Em [forms.py](myproject/myauth/forms.py) criamos `UserCreationForm` e `UserChangeForm`.
 
 
-#### Admin
+### Admin
 
 Em [admins.py](myproject/myauth/admins.py) definimos `UserAdmin` herdando de `BaseUserAdmin`.
 
 
-#### Migração
+### Migração
 
 Agora rode
 
@@ -193,3 +193,84 @@ class MyauthConfig(AppConfig):
     name = 'myproject.myauth'
     verbose_name = 'Autenticação Usuários'
 ```
+
+## Usando [django-braces](https://github.com/brack3t/django-braces) para grupos e permissões
+
+Instale com
+
+```bash
+pip install django-braces
+```
+
+Insira no `requirements.txt`
+
+```bash
+django-braces==1.9.0
+```
+
+Ou digite
+
+```bash
+pip freeze > requirements.txt
+```
+
+Crie uma `view` usando Class Based View
+
+```python
+from django.views.generic import TemplateView
+from braces.views import LoginRequiredMixin
+
+
+class LoggedView(LoginRequiredMixin, TemplateView):
+    template_name = 'core/logged.html'
+```
+
+Defina uma [url](). E em templates, crie `logged.html`.
+
+```html
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Logged</title>
+{% endblock title %}
+
+{% block content %}
+
+    <h2>Você está logado como {{ user.email }}</h2>
+
+{% endblock content %}
+```
+
+Agora crie um novo grupo chamado 'Diretor'. E associe um usuário a esse grupo.
+
+A partir dai podemos editar a `views.py` da seguinte forma:
+
+```python
+from django.views.generic import TemplateView
+from braces.views import GroupRequiredMixin
+
+
+class DirectorTemplateView(GroupRequiredMixin, TemplateView):
+    template_name = 'core/director.html'
+    group_required = u'Diretor'
+```
+
+Veja o `templates/core/director.html`
+
+```html
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Director</title>
+{% endblock title %}
+
+{% block content %}
+
+    <h2>Você está logado</h2>
+
+    <h3><b>e-mail:</b> {{ user.email }}</h3>
+    <h3><b>Grupo:</b> {{ user.groups.first.name }}</h3>
+
+{% endblock content %}
+```
+

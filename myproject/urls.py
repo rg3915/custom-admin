@@ -1,8 +1,7 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
-from myproject.core import views as c
 
 urlpatterns = [
-    url(r'^$', c.home, name='home'),
+    url(r'', include('myproject.core.urls', namespace='core')),
     url(r'^admin/', admin.site.urls),
 ]
