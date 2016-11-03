@@ -12,6 +12,11 @@ class FunctionalCustomUserTest(TestCase):
         u.set_password('1234')
         u.save()
 
+    def test_create_user(self):
+        self.u.objects.create(username=None,
+                              email=self.u.email,
+                              password='1234')
+
     def test_login_with_email(self):
         self.assertTrue(self.client.login(
             email='regis.santos.100@gmail.com',
