@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     # my apps
     'myproject.core',
     'django.contrib.admin',
+    'registration',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -31,7 +32,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # my apps
     'myproject.myauth.apps.MyauthConfig',
-    'registration',
 ]
 
 ACCOUNT_ACTIVATION_DAYS = 7

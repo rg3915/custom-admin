@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from registration.views import RegistrationView
 
-# Create your views here.
+
+class MyView(RegistrationView):
+    pass
+    # mudar o atributo do formulário
+    # estender o form tb.
