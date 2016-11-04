@@ -3,11 +3,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
-  <link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block title %}
+      <title>Custom-Admin</title>
+    {% endblock title %}
+
+    <link rel="shortcut icon" href="https://www.djangoproject.com/favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static "css/login.css" %}" />
+  
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+      /* Move down content because we have a fixed navbar that is 50px tall */
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        /*color: #5a5a5a;*/
+      }
+    </style>
 
 </head>
 <body>
+  {% include "nav.html" %}
   {% block content %}{% endblock %}
   {% block footer %}
     <footer>
