@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.test.utils import override_settings
 from django.contrib.auth import get_user_model
 from django.conf import settings
 
@@ -8,7 +7,7 @@ class FunctionalCustomUserTest(TestCase):
 
     def setUp(self):
         self.user_data = {
-            'username': None,
+            # 'username': None,
             'email': 'regis.santos.100@gmail.com',
             'password': '12345678'
         }
@@ -26,7 +25,7 @@ class FunctionalCustomUserTest(TestCase):
 
     def test_login_with_email(self):
         login_data = {
-            'username': self.user_data.get('email'),
+            'email': self.user_data.get('email'),
             'password': self.user_data.get('password')
         }
         self.assertTrue(self.client.login(**login_data))
