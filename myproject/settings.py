@@ -1,6 +1,7 @@
 import os
 from decouple import config, Csv
 from dj_database_url import parse as dburl
+from django.core.urlresolvers import reverse_lazy as r
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,12 +17,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
-AUTH_USER_MODEL = 'myauth.User'
-
 # Application definition
 
 INSTALLED_APPS = [
-
     # my apps
     'myproject.core',
     'django.contrib.admin',
@@ -33,12 +31,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     # my apps
-    'myproject.myauth.apps.MyauthConfig',
+    'myproject.myauth',
 ]
 
-ACCOUNT_ACTIVATION_DAYS = 7
-REGISTRATION_AUTO_LOGIN = True
-REGISTRATION_OPEN = True
+# django-registration-redux
+
+# ACCOUNT_ACTIVATION_DAYS = 7
+# REGISTRATION_AUTO_LOGIN = True
+# REGISTRATION_OPEN = True
 
 
 MIDDLEWARE_CLASSES = [
@@ -124,5 +124,7 @@ DECIMAL_SEPARATOR = ','
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-LOGIN_URL = '/admin/login/'
-LOGIN_REDIRECT_URL = '/'
+AUTH_USER_MODEL = 'myauth.User'
+
+LOGIN_URL = r('users:login')
+LOGIN_REDIRECT_URL = r('home')
