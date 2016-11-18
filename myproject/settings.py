@@ -21,6 +21,7 @@ AUTH_USER_MODEL = 'myauth.User'
 # Application definition
 
 INSTALLED_APPS = [
+
     # my apps
     'myproject.core',
     'django.contrib.admin',
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     # my apps
     'myproject.myauth.apps.MyauthConfig',
 ]
