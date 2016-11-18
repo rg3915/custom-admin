@@ -1,23 +1,32 @@
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.contrib.auth import get_user_model
+from django.conf import settings
 
 
-@override_settings(AUTH_USER_MODEL='myauth.User')
 class FunctionalCustomUserTest(TestCase):
 
     def setUp(self):
-        UserModel = get_user_model()
-        u = UserModel(email='regis.santos.100@gmail.com')
-        u.set_password('1234')
-        u.save()
+        self.user_data = {
+            'username': None,
+            'email': 'regis.santos.100@gmail.com',
+            'password': '12345678'
+        }
+        self.User = get_user_model()
+
+    def test_auth_user_model(self):
+        self.assertEqual(settings.AUTH_USER_MODEL, 'myauth.User')
 
     def test_create_user(self):
-        self.u.objects.create(username=None,
-                              email=self.u.email,
-                              password='1234')
+        fields = ('email', 'password')
+        create_data = {k: v for k, v in self.user_data.items() if k in fields}
+        self.assertEqual(0, self.User.objects.count())
+        self.User.objects.create(**self.user_data)
+        self.assertEqual(1, self.User.objects.count())
 
     def test_login_with_email(self):
-        self.assertTrue(self.client.login(
-            email='regis.santos.100@gmail.com',
-            password='1234'))
+        login_data = {
+            'username': self.user_data.get('email'),
+            'password': self.user_data.get('password')
+        }
+        self.assertTrue(self.client.login(**login_data))
